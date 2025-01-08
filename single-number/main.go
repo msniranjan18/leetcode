@@ -87,3 +87,15 @@ func singleNumber(nums []int) int {
 	}
 	return result
 }
+
+/*
+Output:
+testcase:[2 2 1], result:1 
+testcase:[4 1 2 1 2], result:4 
+testcase:[1], result:1 
+testcase:[1 0 3 0 1], result:3 
+testcase:[2 2 1 3 3], result:1 
+testcase:[1 2 3 2 1], result:3 
+testcase:[1 2 2], result:1 
+testcase:[2 1 2], result:1 
+*/
