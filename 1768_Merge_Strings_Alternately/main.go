@@ -57,16 +57,32 @@ func main() {
 }
 
 func mergeAlternately(word1 string, word2 string) string {
+	// brute force
+	// var result []byte
+	// i := 0
+	// for ; i < len(word1) && i < len(word2); i++ {
+	// 	result = append(result, word1[i], word2[i])
+	// }
+	// for ; i < len(word1); i++ {
+	// 	result = append(result, word1[i])
+	// }
+	// for ; i < len(word2); i++ {
+	// 	result = append(result, word2[i])
+	// }
+	// return string(result)
+
+	// two pointers
 	var result []byte
-	i := 0
-	for ; i < len(word1) && i < len(word2); i++ {
-		result = append(result, word1[i], word2[i])
-	}
-	for ; i < len(word1); i++ {
-		result = append(result, word1[i])
-	}
-	for ; i < len(word2); i++ {
-		result = append(result, word2[i])
+	i:=0; j:=0
+	for ;i<len(word1) || j<len(word2); {
+		if i<len(word1) {
+		    result = append(result,word1[i])
+		    i++
+		}
+		if j<len(word2) {
+		    result = append(result,word2[j])
+		    j++
+		}
 	}
 	return string(result)
 }
