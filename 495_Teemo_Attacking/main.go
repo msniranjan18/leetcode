@@ -5,7 +5,7 @@ You are given a non-decreasing integer array timeSeries, where timeSeries[i] den
 
 Return the total number of seconds that Ashe is poisoned.
 
- 
+
 
 Example 1:
 
@@ -23,7 +23,7 @@ Explanation: Teemo's attacks on Ashe go as follows:
 - At second 1, Teemo attacks, and Ashe is poisoned for seconds 1 and 2.
 - At second 2 however, Teemo attacks again and resets the poison timer. Ashe is poisoned for seconds 2 and 3.
 Ashe is poisoned for seconds 1, 2, and 3, which is 3 seconds in total.
- 
+
 
 Constraints:
 
@@ -36,18 +36,29 @@ package main
 
 import "fmt"
 
+type TestCase struct {
+	TimeSeries []int
+	Duration   int
+	Expected   int
+}
+
 func main() {
-	testcases := [][]int{
-		{1, 4}, {2},
-		{1, 2}, {4},
-		{2, 4, 6}, {6},
-		{3, 8, 13}, {6},
-		{4, 10, 20}, {6},
-		{10}, {6},
+	testCases := []TestCase{
+		{TimeSeries: []int{1, 4}, Duration: 2, Expected: 4},
+		{TimeSeries: []int{1, 2}, Duration: 4, Expected: 5},
+		{TimeSeries: []int{2, 4, 6}, Duration: 6, Expected: 10},
+		{TimeSeries: []int{3, 8, 13}, Duration: 6, Expected: 16},
+		{TimeSeries: []int{4, 10, 20}, Duration: 6, Expected: 18},
+		{TimeSeries: []int{10}, Duration: 6, Expected: 6},
 	}
 
-	for i := 0; i < len(testcases); i += 2 {
-		fmt.Printf("testcase: timeSeries=%+v, duration=%+v, totalPoisonedDuration:%+v \n", testcases[i], testcases[i+1], findPoisonedDuration(testcases[i], testcases[i+1][0]))
+	for _, testCase := range testCases {
+		result := findPoisonedDuration(testCase.TimeSeries, testCase.Duration)
+		if result == testCase.Expected {
+			fmt.Printf("Test Case: [TimeSeries=%+v, Duration=%d] PASSED: output: %d, expected %d\n", testCase.TimeSeries, testCase.Duration, result, testCase.Expected)
+		} else {
+			fmt.Printf("Test Case: [TimeSeries=%+v, Duration=%d] FAILED: output: %d, expected %d\n", testCase.TimeSeries, testCase.Duration, result, testCase.Expected)
+		}
 	}
 
 }
@@ -71,10 +82,10 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 
 /*
 Output:
-testcase: timeSeries=[1 4], duration=[2], totalPoisonedDuration:4 
-testcase: timeSeries=[1 2], duration=[4], totalPoisonedDuration:5 
-testcase: timeSeries=[2 4 6], duration=[6], totalPoisonedDuration:10 
-testcase: timeSeries=[3 8 13], duration=[6], totalPoisonedDuration:16 
-testcase: timeSeries=[4 10 20], duration=[6], totalPoisonedDuration:18 
-testcase: timeSeries=[10], duration=[6], totalPoisonedDuration:6 
+Test Case: [TimeSeries=[1 4], Duration=2] PASSED: output: 4, expected 4
+Test Case: [TimeSeries=[1 2], Duration=4] PASSED: output: 5, expected 5
+Test Case: [TimeSeries=[2 4 6], Duration=6] PASSED: output: 10, expected 10
+Test Case: [TimeSeries=[3 8 13], Duration=6] PASSED: output: 16, expected 16
+Test Case: [TimeSeries=[4 10 20], Duration=6] PASSED: output: 18, expected 18
+Test Case: [TimeSeries=[10], Duration=6] PASSED: output: 6, expected 6
 */
