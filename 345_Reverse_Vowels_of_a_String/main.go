@@ -36,13 +36,17 @@ type TestCase struct {
 	Expected    string
 }
 
-var vowels = map[byte]bool{
-	'a': true, 'A': true,
-	'e': true, 'E': true,
-	'i': true, 'I': true,
-	'o': true, 'O': true,
-	'u': true, 'U': true,
-}
+// var vowels = map[byte]bool{
+// 	'a': true, 'A': true,
+// 	'e': true, 'E': true,
+// 	'i': true, 'I': true,
+// 	'o': true, 'O': true,
+// 	'u': true, 'U': true,
+// }
+
+// Predefined set of vowels
+// this saves memory
+var vowels = "aeiouAEIOU"
 
 func main() {
 	testCases := []TestCase{
@@ -63,7 +67,7 @@ func main() {
 }
 
 func reverseVowels(s string) string {
-	str := []byte(s)
+	str := []rune(s)
 	i, j := 0, len(str)-1
 
 	for i < j {
@@ -87,9 +91,44 @@ func reverseVowels(s string) string {
 }
 
 // Helper function to check if a character is a vowel
-func isVowel(c byte) bool {
-	return vowels[c]
+// Check if a character is a vowel
+func isVowel(c rune) bool {
+    for _, v := range vowels {
+        if c == rune(v) {
+            return true
+        }
+    }
+    return false
 }
+
+// func reverseVowels(s string) string {
+// 	str := []byte(s)
+// 	i, j := 0, len(str)-1
+
+// 	for i < j {
+// 		// Move i forward if not a vowel
+// 		for i < j && !isVowel(str[i]) {
+// 			i++
+// 		}
+// 		// Move j backward if not a vowel
+// 		for i < j && !isVowel(str[j]) {
+// 			j--
+// 		}
+// 		// Swap vowels
+// 		if i < j {
+// 			str[i], str[j] = str[j], str[i]
+// 			i++
+// 			j--
+// 		}
+// 	}
+
+// 	return string(str)
+// }
+
+// // Helper function to check if a character is a vowel
+// func isVowel(c byte) bool {
+// 	return vowels[c]
+// }
 
 /*
 Output:
