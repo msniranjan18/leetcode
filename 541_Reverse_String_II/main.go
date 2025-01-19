@@ -53,29 +53,46 @@ func main() {
 
 }
 
+// func reverseStr(s string, k int) string {
+// 	str := []byte(s)
+// 	i := 0
+// 	if k == 1 {
+// 		return s
+// 	}
+// 	for i < len(str) {
+// 		if len(str)-i < 2*k {
+// 			if len(str)-i >= k {
+// 				reverse(str[i : i+k])
+// 				return string(str)
+// 			}
+// 			if len(str)-i < k {
+// 				reverse(str[i:])
+// 				return string(str)
+// 			}
+// 		}
+// 		if k < len(str) {
+// 			reverse(str[i : i+k])
+// 			i += 2 * k
+// 		}
+// 	}
+// 	return string(str)
+// }
+
+// Optimal Solution (only in reading; both the code has same Time and Space complexity)
 func reverseStr(s string, k int) string {
-	str := []byte(s)
-	i := 0
-	if k == 1 {
-		return s
-	}
-	for i < len(str) {
-		if len(str)-i < 2*k {
-			if len(str)-i >= k {
-				reverse(str[i : i+k])
-				return string(str)
-			}
-			if len(str)-i < k {
-				reverse(str[i:])
-				return string(str)
-			}
-		}
-		if k < len(str) {
-			reverse(str[i : i+k])
-			i += 2 * k
-		}
-	}
-	return string(str)
+    str := []byte(s)
+    n := len(str)
+
+    for i := 0; i < n; i += 2 * k {
+        // Calculate the end index for reversing
+        end := i + k
+        if end > n {
+            end = n
+        }
+        reverse(str[i:end])
+    }
+
+    return string(str)
 }
 
 func reverse(s []byte) {
