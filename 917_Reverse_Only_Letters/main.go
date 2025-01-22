@@ -57,37 +57,63 @@ func main() {
 
 }
 
-func reverseOnlyLetters(s string) string {
-	i, j := 0, len(s)-1
-	str := []byte(s)
-	for i < j {
-		for i < j {
-			if isEnglishLetter(str[i]) {
-				break
-			} else {
-				i++
-			}
-		}
-		for i < j {
-			if isEnglishLetter(str[j]) {
-				break
-			} else {
-				j--
-			}
-		}
-		str[i], str[j] = str[j], str[i]
-		i++
-		j--
+// func reverseOnlyLetters(s string) string {
+// 	i, j := 0, len(s)-1
+// 	str := []byte(s)
+// 	for i < j {
+// 		for i < j {
+// 			if isEnglishLetter(str[i]) {
+// 				break
+// 			} else {
+// 				i++
+// 			}
+// 		}
+// 		for i < j {
+// 			if isEnglishLetter(str[j]) {
+// 				break
+// 			} else {
+// 				j--
+// 			}
+// 		}
+// 		str[i], str[j] = str[j], str[i]
+// 		i++
+// 		j--
 
-	}
-	return string(str)
+// 	}
+// 	return string(str)
+// }
+
+// func isEnglishLetter(c byte) bool {
+// 	if (rune(c) >= 'a' && rune(c) <= 'z') || (rune(c) >= 'A' && rune(c) <= 'Z') {
+// 		return true
+// 	}
+// 	return false
+// }
+func reverseOnlyLetters(s string) string {
+    i, j := 0, len(s)-1
+    str := []byte(s)
+    
+    for i < j {
+        // Skip non-letters at the start
+        if !isEnglishLetter(str[i]) {
+            i++
+            continue
+        }
+        // Skip non-letters at the end
+        if !isEnglishLetter(str[j]) {
+            j--
+            continue
+        }
+        // Swap and move pointers
+        str[i], str[j] = str[j], str[i]
+        i++
+        j--
+    }
+    return string(str)
 }
 
 func isEnglishLetter(c byte) bool {
-	if (rune(c) >= 'a' && rune(c) <= 'z') || (rune(c) >= 'A' && rune(c) <= 'Z') {
-		return true
-	}
-	return false
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
 }
 
 /*
