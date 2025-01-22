@@ -91,6 +91,30 @@ func main() {
 func finalString(s string) string {
 	// Use a fixed-capacity byte slice to hold the result
 	str := make([]byte, 0, len(s))
+	/*
+	Using a fixed capacity slice with make([]byte, 0, len(s)) in the optimized code improves performance and memory efficiency. Here's a detailed explanation of why this approach is beneficial:
+	
+	1. Avoids Frequent Memory Allocations
+	When you create a slice using make([]byte, 0, len(s)), you preallocate memory for the slice with a capacity equal to the length of the input string (len(s)). This ensures that the slice has enough space to hold all potential elements without needing to grow dynamically.
+	
+	If you were to append elements to a slice without preallocating capacity, Go would dynamically resize the slice when its capacity is exceeded. This resizing involves:
+	
+	Allocating a new array with larger capacity.
+	Copying the existing elements to the new array.
+	Releasing the old array for garbage collection.
+	This dynamic resizing can be expensive, especially in cases where many appends are involved, as it introduces both time and memory overhead.
+	
+	2. Ensures Predictable Memory Usage
+	By setting the capacity to len(s), the memory usage of the slice is predictable and fixed. Since the final string cannot exceed the length of the input string (s), preallocating this capacity ensures no unnecessary memory is allocated.
+	
+	3. Improves Append Performance
+	Appending elements to a slice with sufficient preallocated capacity is efficient because it does not trigger slice resizing. Each append simply writes the element to the next available position in the underlying array. Without preallocation, every few append operations might trigger a resize, incurring additional cost.
+	
+	Why Not make([]byte, len(s))?
+	Using make([]byte, len(s)) would preinitialize the slice with a length and capacity equal to len(s). While this avoids resizing issues, it creates a slice with a length that already includes placeholder values (0 bytes for []byte). This is unnecessary and can cause incorrect behavior if you directly use it without considering the initial values.
+	
+	In contrast, make([]byte, 0, len(s)) creates a slice with zero initial elements but a capacity large enough to accommodate all potential appends.
+	*/
 
 	for _, char := range s {
 		if char == 'i' {
