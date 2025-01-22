@@ -75,10 +75,11 @@ func main() {
 // 				j--
 // 			}
 // 		}
-// 		str[i], str[j] = str[j], str[i]
-// 		i++
-// 		j--
-
+// 		if i<j {
+// 			str[i], str[j] = str[j], str[i]
+// 			i++
+// 			j--
+// 		}
 // 	}
 // 	return string(str)
 // }
