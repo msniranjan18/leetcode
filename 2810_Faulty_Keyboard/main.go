@@ -73,19 +73,36 @@ func main() {
 
 }
 
+// func finalString(s string) string {
+// 	str := []byte(s)
+// 	for i := 0; i < len(str); i++ {
+// 		if string(str[i]) == "i" {
+// 			reverseStr(str[:i])
+// 			if i != len(str)-1 {
+// 				copy(str[i:], str[i+1:])
+// 			}
+// 			str = str[:len(str)-1]
+// 			i--
+// 		}
+// 	}
+// 	return string(str)
+// }
+
 func finalString(s string) string {
-	str := []byte(s)
-	for i := 0; i < len(str); i++ {
-		if string(str[i]) == "i" {
-			reverseStr(str[:i])
-			if i != len(str)-1 {
-				copy(str[i:], str[i+1:])
-			}
-			str = str[:len(str)-1]
-			i--
+	// Use a fixed-capacity byte slice to hold the result
+	str := make([]byte, 0, len(s))
+
+	for _, char := range s {
+		if char == 'i' {
+			// Reverse only the part of the slice that's been built so far
+			reverseStr(str)
+		} else {
+			// Append the current character to the result
+			str = append(str, byte(char))
 		}
 	}
-	return string(str)
+
+	return string(bytes)
 }
 
 func reverseStr(s []byte) {
