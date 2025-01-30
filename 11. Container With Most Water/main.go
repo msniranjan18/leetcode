@@ -57,6 +57,25 @@ func maxArea(height []int) int {
 }
 
 /*
+// More readable code; using built-in func
+func maxArea(height []int) int {
+	maximum := 0
+        minmum := 0
+	for i, j := 0, len(height)-1; i < j; {
+		minmum = min(height[i], height[j])
+		maximum = max(maximum, (j-i)*minmum)
+		if height[i] > height[j] {
+			j--
+		} else {
+			i++
+		}
+
+	}
+	return maximum
+}
+*/
+
+/*
 Output:
 49
 */
