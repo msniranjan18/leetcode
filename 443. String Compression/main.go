@@ -53,7 +53,18 @@ func main() {
 	elapsed := time.Since(startTime) // Calculate elapsed time
 
 	fmt.Printf("compressed string: %v\n", string(chars[:result]))
-	fmt.Printf("Execution Time: %+v for input array length: %d\n", elapsed, len(chars))
+	fmt.Printf("Execution Time with my solution: %+v for input array length: %d\n", elapsed, len(chars))
+
+	fmt.Println()
+	fmt.Println()
+
+	// in-place solution
+	startTime = time.Now() //start the timer
+	result = compress_inplace(chars)
+	elapsed = time.Since(startTime) // Calculate elapsed time
+
+	fmt.Printf("compressed string: %v\n", string(chars[:result]))
+	fmt.Printf("Execution Time with in-place solution: %+v for input array length: %d\n", elapsed, len(chars))
 }
 
 func compress(chars []byte) int {
@@ -84,8 +95,42 @@ func compress(chars []byte) int {
 	return len(s)
 }
 
+func compress_inplace(chars []byte) int {
+	readIdx, writeIdx := 0, 0
+	count := 0
+	for readIdx < len(chars) {
+		char := chars[readIdx]
+		count = 1
+		readIdx++
+
+		// count this character occurance
+		for readIdx < len(chars) && chars[readIdx] == char {
+			readIdx++
+			count++
+		}
+
+		// write it to chars (in-place)
+		chars[writeIdx] = char
+		writeIdx++
+
+		// write the character occurance count if > 1
+		if count > 1 {
+			strCount := strconv.Itoa(count)
+			for _, digit := range strCount {
+				chars[writeIdx] = byte(digit)
+				writeIdx++
+			}
+		}
+	}
+	return writeIdx
+}
+
 /*
 Output:
 compressed string: a852b49500c6222
-Execution Time: 0s for input array length: 56574
+Execution Time with my solution: 132.541µs for input array length: 56574
+
+
+compressed string: a852b49502c623a837b49500c6222
+Execution Time with in-place solution: 78.542µs for input array length: 56574
 */
