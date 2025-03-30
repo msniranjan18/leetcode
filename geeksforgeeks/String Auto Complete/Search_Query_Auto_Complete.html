@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .suggestions {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            display: none;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Start typing...">
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <script>
+        const sentences = ["i love you", "island", "ironman", "i love golang"];
+        
+        document.getElementById("search").addEventListener("input", function() {
+            const inputText = this.value.toLowerCase();
+            const suggestionsBox = document.getElementById("suggestions");
+            
+            if (!inputText) {
+                suggestionsBox.style.display = "none";
+                return;
+            }
+
+            const filteredSuggestions = sentences
+                .filter(sentence => sentence.toLowerCase().startsWith(inputText))
+                .slice(0, 3);
+
+            suggestionsBox.innerHTML = "";
+            if (filteredSuggestions.length === 0) {
+                suggestionsBox.style.display = "none";
+                return;
+            }
+
+            filteredSuggestions.forEach(suggestion => {
+                const div = document.createElement("div");
+                div.textContent = suggestion;
+                div.onclick = function() {
+                    document.getElementById("search").value = suggestion;
+                    suggestionsBox.style.display = "none";
+                };
+                suggestionsBox.appendChild(div);
+            });
+
+            suggestionsBox.style.display = "block";
+        });
+
+        document.addEventListener("click", function(e) {
+            if (!document.querySelector(".search-container").contains(e.target)) {
+                document.getElementById("suggestions").style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>
