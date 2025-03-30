@@ -1,0 +1,40 @@
+func longestPalindrome(s string, t string) int {
+    max := 0
+
+    for i:=0 ; i<len(s);i++{
+        for j:=i;j<=len(s);j++ {
+            sub1 := s[i:j]
+            //fmt.Println("s sub:",sub1)
+            for p:=0; p<len(t); p++ {
+                for q:=p; q<=len(t); q++ {
+                    sub2 := t[p:q]
+                    //fmt.Println("t sub:",sub2)
+
+                    comb := sub1 + sub2
+                    rev := reverse(comb)
+                    //fmt.Println(comb,"<-->",rev)
+                    if rev == comb {
+                        if max < len(comb) {
+                            max = len(comb)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return max
+}
+
+// Optimized reverse function using runes
+func reverse(s string) string {
+	runes := []rune(s) // Convert string to rune slice
+	left, right := 0, len(runes)-1
+
+	for left < right {
+		runes[left], runes[right] = runes[right], runes[left] // Swap runes
+		left++
+		right--
+	}
+	return string(runes) // Convert back to string
+}
+
