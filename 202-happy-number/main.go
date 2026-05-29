@@ -10,6 +10,11 @@ func main() {
 }
 
 func isHappy(n int) bool {
+    //return bruteforceApproach(n)
+    return floydCycleDetectionApproach(n)
+}
+
+func floydCycleDetectionApproach(n int) bool {
     fast:=nextNumber(n)
     slow:=n
     for {
@@ -23,6 +28,21 @@ func isHappy(n int) bool {
         slow = nextNumber(slow)
     }
     return false
+}
+
+func bruteforceApproach(n int) bool {
+    m := make(map[int]struct{}, 0)
+    for {
+        n = nextNumber(n)
+        if n == 1 {
+            return true
+        } else if _, ok:= m[n]; !ok {
+            m[n] = struct{}{}
+        } else {
+            return false
+        } 
+    }
+    return true
 }
 
 func nextNumber(n int) int {
