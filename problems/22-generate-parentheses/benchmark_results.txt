@@ -1,0 +1,21 @@
+goos: linux
+goarch: amd64
+pkg: github.com/msniranjan18/leetcode/22-generate-parentheses
+cpu: 13th Gen Intel(R) Core(TM) i5-13500H
+BenchmarkGenerateParentheses-16    	       1	4326754031 ns/op	4288919144 B/op	35357747 allocs/op
+PASS
+ok  	github.com/msniranjan18/leetcode/22-generate-parentheses	4.736s
+goos: linux
+goarch: amd64
+pkg: github.com/msniranjan18/leetcode/22-generate-parentheses
+cpu: 13th Gen Intel(R) Core(TM) i5-13500H
+BenchmarkGenerateParentheses-16    	       1	4554222509 ns/op
+PASS
+ok  	github.com/msniranjan18/leetcode/22-generate-parentheses	5.033s
+goos: linux
+goarch: amd64
+pkg: github.com/msniranjan18/leetcode/22-generate-parentheses
+cpu: 13th Gen Intel(R) Core(TM) i5-13500H
+BenchmarkGenerateParentheses-16    	       1	4382247367 ns/op	4288907064 B/op	35357730 allocs/op
+PASS
+ok  	github.com/msniranjan18/leetcode/22-generate-parentheses	4.797s

@@ -11,8 +11,10 @@ go test -bench=. -benchtime=5s
 
 # Force Go to execute the loop exactly 10,000 times, ignoring the time limit entirely
 go test -bench=. -benchtime=10000x
+
 C. Run Multiple Iterations for Statistical Significance (-count)Running a benchmark once can occasionally be misleading if your OS happens to perform an update or a CPU spike right at that second. To get scientific data, you can ask Go to repeat the entire benchmark run multiple times.Bash# Run the benchmark sequence 5 times back-to-back to catch variance
 go test -bench=. -count=5 -benchmem
+
 D. Bypass Unit Tests (-run)When you run go test -bench=., Go will always run your standard TestXxx unit tests first before initiating the benchmarks. If your unit tests take a few seconds to verify data, this slows down your benchmarking feedback loop.You can use the -run flag (which filters unit tests) to tell Go to look for a non-existent unit test name, effectively skipping them completely:Bash# Tells Go to run 0 unit tests (because none match "None"), jumping straight to benchmarks
 go test -run=^$ -bench=. -benchmem
 (Note: ^$ is a regular expression for an empty string, which will never match a real test function name).E. Export Profiles for Visualization (-cpuprofile & -memprofile)If your benchmark reveals your code is slow, but you don't know which specific line of code is causing the bottleneck, you can dump the entire execution trace into raw binary profile dumps:Bash# Dump CPU and Memory timelines to file systems

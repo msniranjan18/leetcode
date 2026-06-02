@@ -11,10 +11,10 @@ func main() {
 	fmt.Println("10",len(generateParenthesis(10)))
 	fmt.Println("12",len(generateParenthesis(12)))
 	fmt.Println("14",len(generateParenthesis(14)))
-	fmt.Println("16",len(generateParenthesis(16)))
-	fmt.Println("18",len(generateParenthesis(18)))
-	fmt.Println("20",len(generateParenthesis(20)))
-	fmt.Println("22",len(generateParenthesis(22)))
+	// fmt.Println("16",len(generateParenthesis(16)))
+	// fmt.Println("18",len(generateParenthesis(18)))
+	// fmt.Println("20",len(generateParenthesis(20)))
+	// fmt.Println("22",len(generateParenthesis(22)))
 
 }
 func generateParenthesisTest(n int) int {
