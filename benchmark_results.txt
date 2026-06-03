@@ -1,0 +1,16 @@
+goos: linux
+goarch: amd64
+pkg: github.com/msniranjan18/leetcode/problems/33-search-in-rotated-sorted-array
+cpu: 13th Gen Intel(R) Core(TM) i5-13500H
+BenchmarkSearch-16    	90949932	        11.89 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/msniranjan18/leetcode/problems/33-search-in-rotated-sorted-array	1.846s
+FAIL	github.com/msniranjan18/leetcode/problems/33-search-in-rotated-sorted-array [setup failed]
+FAIL
+goos: linux
+goarch: amd64
+pkg: github.com/msniranjan18/leetcode/problems/33-search-in-rotated-sorted-array
+cpu: 13th Gen Intel(R) Core(TM) i5-13500H
+BenchmarkSearch-16    	51468428	        26.46 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/msniranjan18/leetcode/problems/33-search-in-rotated-sorted-array	1.873s
